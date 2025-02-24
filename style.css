@@ -34,7 +34,7 @@ body {
   justify-content: center;
   align-items: center;
   display: flex;
-  opacity: 0;
+  opacity: 1;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -80,6 +80,7 @@ body {
   left: 750px;
   top: 575px;
   position: fixed;
+  z-index: 2;
 }
 .dot {
   background-color: #000;
