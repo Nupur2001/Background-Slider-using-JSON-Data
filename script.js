@@ -18,26 +18,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   function slidesLoading() {
-    slide.forEach((slider) => {
-      slider = document.createElement("div");
-      slider.classList.add("slide");
-      body.style.backgroundImage = `${slide.url}`;
-      console.log(`${slide.url}`);
-      sliderContainer.appendChild(slider);
+    slide.forEach((slideData) => {
+      let slide = document.createElement("div");
+      slide.classList.add("slide");
 
-      dotCreation = document.createElement("div");
-      dotCreation.classList.add("dot");
-      // dots.forEach(dot => {
-      //     dot.addEventListener('click',()=>{
-      //         dot.classList.toggle('active')
-      //     })
-      // });
-      dotCreation.addEventListener("click", () => {
-        dots.classList.toggle("active");
-        // console.log("dot is clicked")
-      });
-      sliderContainer.appendChild(dotCreation);
-      dots.append(dotCreation);
+      body.style.backgroundImage = `url(${slideData.url})`;
+      slide.style.backgroundImage = `url(${slideData.url})`;
+      sliderContainer.appendChild(slide);
+
+      let dot = document.createElement("div");
+      dot.classList.add("dot");
+      dots.appendChild(dot);
+      dot.addEventListener("click", () => {
+        dot.classList.toggle("active");
+        console.log(`${slideData.url} was clicked`)
+    // dot[slideNumber].classList.toggle('active')
+
+    })
+      sliderContainer.appendChild(dot);
+      dots.append(dot);
     });
   }
 });
