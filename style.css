@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body::after {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  transition: 0.3s;
+}
+.sliderContainer {
+  width: 70vw;
+  height: 70vh;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6), 0 3px 6px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+.slide {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 3.2rem;
+  color: white;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1;
+  height: 80vh;
+  max-height: 500px;
+  width: 80vw;
+  max-width: 1200px;
+  background-position: center center;
+  background-size: cover;
+}
+.angle {
+  position: fixed;
+  padding: 20px;
+  font-size: 2rem;
+  border: 2px solid orange;
+  color: white;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.leftBtn {
+  position: absolute;
+  left: calc(15vw - 321px);
+}
+.rightBtn {
+  position: absolute;
+  right: calc(15vw - 259px);
+}
+.slide.active {
+  opacity: 1;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+  left: 750px;
+  top: 575px;
+  position: fixed;
+}
+.dot {
+  background-color: #000;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.dot.active {
+  background-color: white;
+}
+
+@media (max-width: 912px) {
+  .leftBtn {
+    left: calc(15vw - 223px);
+  }
+  .rightBtn {
+    right: calc(15vw - 141px);
+  }
+  .angle {
+    padding: 19px;
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .leftBtn {
+    left: calc(15vw - 125px);
+  }
+  .rightBtn {
+    right: calc(15vw - 60px);
+  }
+  .angle {
+    padding: 18px;
+    font-size: 1.5rem;
+  }
+}
