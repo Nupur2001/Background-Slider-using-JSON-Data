@@ -3,40 +3,48 @@ document.addEventListener("DOMContentLoaded", () => {
   let sliderContainer = document.querySelector(".sliderContainer");
   let leftBtn = document.querySelector(".leftBtn");
   let rightBtn = document.querySelector(".rightBtn");
-  let dots = document.querySelector(".dots");
-
+  let dotContainer = document.querySelector(".dots");
   let slideNumber = 0;
-
-  let slide = [];
-
+  let slides = [];
   fetch("images.json")
     .then((res) => res.json())
     .then((data) => {
-      slide = data.slides;
-      console.log(slide);
+      slides = data.slides;
       slidesLoading();
+      updateSlide();
     });
-
   function slidesLoading() {
-    slide.forEach((slideData) => {
-      let slide = document.createElement("div");
-      slide.classList.add("slide");
-
-      body.style.backgroundImage = `url(${slideData.url})`;
-      slide.style.backgroundImage = `url(${slideData.url})`;
-      sliderContainer.appendChild(slide);
-
+    dotContainer.innerHTML = "";
+    slides.forEach((slide, index) => {
       let dot = document.createElement("div");
       dot.classList.add("dot");
-      dots.appendChild(dot);
+      dot.dataset.index = index;
       dot.addEventListener("click", () => {
-        dot.classList.toggle("active");
-        console.log(`${slideData.url} was clicked`)
-    // dot[slideNumber].classList.toggle('active')
-
-    })
-      sliderContainer.appendChild(dot);
-      dots.append(dot);
+        changeSlide(index);
+      });
+      dotContainer.appendChild(dot);
     });
   }
+  function changeSlide(index) {
+    slideNumber = index;
+    updateSlide();
+  }
+  function updateSlide() {
+    if (slides.length === 0) return;
+    body.style.backgroundImage = `url(${slides[slideNumber].url})`;
+    let dots = document.querySelectorAll(".dot");
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === slideNumber);
+    });
+  }
+  leftBtn.addEventListener("click", () => {
+    slideNumber = (slideNumber - 1 + slides.length) % slides.length;
+    console.log(slideNumber)
+    updateSlide();
+  });
+  rightBtn.addEventListener("click", () => {
+    slideNumber = (slideNumber + 1) % slides.length;
+    console.log(slideNumber)
+    updateSlide();
+  });
 });
